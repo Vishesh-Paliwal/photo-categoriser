@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Photo Gallery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Wedding Photo Gallery</h1>
+            <p>Browse photos organized by person</p>
+        </header>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading gallery...</p>
+        </div>
+
+        <main id="gallery-container" class="gallery-container hidden">
+            <div id="persons-grid" class="persons-grid">
+                <!-- Person icons will be populated here -->
+            </div>
+            
+            <div id="person-photos" class="person-photos hidden">
+                <button class="back-btn" onclick="showPersonsGrid()">← Back to All Persons</button>
+                <div class="person-photos-header">
+                    <h2 id="current-person-name"></h2>
+                    <button class="download-person-btn" id="download-current-person">
+                        📥 Download All
+                    </button>
+                </div>
+                <div id="photos-grid" class="photo-grid">
+                    <!-- Photos will be populated here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for full-size image -->
+    <div id="photo-modal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <button class="modal-nav modal-prev" onclick="navigatePhoto(-1)">‹</button>
+        <img class="modal-content" id="modal-img" alt="Full size photo">
+        <button class="modal-nav modal-next" onclick="navigatePhoto(1)">›</button>
+        <div class="modal-info" id="modal-info"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Face Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Photo Face Recognition</h1>
+            <p>Organize photos from Google Drive by detected faces</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="gdrive-url">Google Drive Folder Link:</label>
+                <input 
+                    type="text" 
+                    id="gdrive-url" 
+                    placeholder="https://drive.google.com/drive/folders/..."
+                    value="https://drive.google.com/drive/folders/18lDRaMQxP-kFmuYY87kvkMa-pbPWlDo7?usp=sharing"
+                >
+                <button id="process-btn" onclick="startProcessing()">Start Processing</button>
+            </div>
+
+            <div id="status-section" class="status-section hidden">
+                <div class="status-header">
+                    <span id="status-icon">⏳</span>
+                    <span id="status-text">Initializing...</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                
+                <div id="progress-text" class="progress-text">0 / 0</div>
+            </div>
+
+            <div id="results-section" class="results-section hidden">
+                <h2>✅ Processing Complete!</h2>
+                <div class="results-info">
+                    <p id="results-summary"></p>
+                </div>
+                
+                <div id="gallery-container" class="gallery-container">
+                    <!-- Gallery will be populated here -->
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="cleanup()">
+                        🗑️ Clean Up & Start Over
+                    </button>
+                </div>
+            </div>
+
+            <div id="error-section" class="error-section hidden">
+                <h2>❌ Error</h2>
+                <p id="error-message"></p>
+                <button class="btn-secondary" onclick="resetApp()">Try Again</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Works with publicly shared Google Drive folders • No authentication required</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
